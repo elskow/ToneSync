@@ -61,4 +61,42 @@ class USBHelper {
 
         return (vendorID, productID)
     }
+
+        static func isControlSupported(device: io_service_t, control: UInt8) -> Bool {
+        var supported = false
+        var propertyIterator: io_iterator_t = 0
+
+        let result = IORegistryEntryCreateIterator(
+            device,
+            kIOServicePlane,
+            IOOptionBits(kIORegistryIterateRecursively),
+            &propertyIterator
+        )
+
+        guard result == KERN_SUCCESS else {
+            return false
+        }
+
+        defer { IOObjectRelease(propertyIterator) }
+
+        var current = IOIteratorNext(propertyIterator)
+        while current != 0 {
+            defer {
+                IOObjectRelease(current)
+                current = IOIteratorNext(propertyIterator)
+            }
+
+            var propertyDict: Unmanaged<CFMutableDictionary>?
+            if IORegistryEntryCreateCFProperties(current, &propertyDict, kCFAllocatorDefault, 0) == KERN_SUCCESS,
+               let dict = propertyDict?.takeRetainedValue() as NSDictionary? {
+                if let controls = dict["SupportedControls"] as? [String: Any] {
+                    let controlKey = String(format: "UVC_CTRL_%02X", control)
+                    supported = controls[controlKey] != nil
+                    if supported { break }
+                }
+            }
+        }
+
+        return supported
+    }
 }

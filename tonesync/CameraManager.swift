@@ -21,9 +21,9 @@ class CameraManager: ObservableObject {
 
     func loadDevices() {
         let session = AVCaptureDevice.DiscoverySession(
-            deviceTypes: [.externalUnknown, .builtInWideAngleCamera],
-            mediaType: .video,
-            position: .unspecified
+                deviceTypes: [.externalUnknown, .builtInWideAngleCamera],
+                mediaType: .video,
+                position: .unspecified
         )
 
         availableDevices = session.devices.map { device in
@@ -105,7 +105,9 @@ class CameraManager: ObservableObject {
         ]
 
         for (control, value) in controls {
-            sendUSBControl(device: device, request: control, value: value)
+            if USBHelper.isControlSupported(device: device, control: control) {
+                sendUSBControl(device: device, request: control, value: value)
+            }
         }
     }
 
@@ -123,7 +125,9 @@ class CameraManager: ObservableObject {
         ]
 
         for (control, value) in controls {
-            sendUSBControl(device: device, request: control, value: value)
+            if USBHelper.isControlSupported(device: device, control: control) {
+                sendUSBControl(device: device, request: control, value: value)
+            }
         }
     }
 
@@ -132,13 +136,15 @@ class CameraManager: ObservableObject {
         var data: UInt8 = value
 
         let kr = IORegistryEntrySetCFProperty(
-            device,
-            ("UVC_CTRL_" + String(request, radix: 16, uppercase: true)) as CFString,
-            NSData(bytes: &data, length: dataSize) as CFData
+                device,
+                ("UVC_CTRL_" + String(format: "%02X", request)) as CFString,
+                NSData(bytes: &data, length: dataSize) as CFData
         )
 
         if kr != KERN_SUCCESS {
-            print("Failed to set USB control: \(request)")
+            #if DEBUG
+            print("Failed to set USB control: \(String(format: "0x%02X", request))")
+            #endif
         }
     }
 
@@ -155,7 +161,7 @@ class CameraManager: ObservableObject {
                 device.avDevice.whiteBalanceMode = .continuousAutoWhiteBalance
             }
 
-             device.avDevice.unlockForConfiguration()
+            device.avDevice.unlockForConfiguration()
         } catch {
             print("Could not reset camera: \(error)")
         }
@@ -172,7 +178,7 @@ struct CaptureDevice: Identifiable, Hashable {
         self.avDevice = device
     }
 
-    static func == (lhs: CaptureDevice, rhs: CaptureDevice) -> Bool {
+    static func ==(lhs: CaptureDevice, rhs: CaptureDevice) -> Bool {
         return lhs.id == rhs.id
     }
 
