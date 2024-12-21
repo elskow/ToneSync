@@ -7,6 +7,8 @@ import IOKit
 import IOKit.usb
 
 class USBHelper {
+    private static var deviceInfoCache: [io_service_t: (vendorID: Int, productID: Int)] = [:]
+
     static func findUSBDevice(withVendorID vendorID: Int, productID: Int) -> io_service_t? {
         let matchingDict = IOServiceMatching(kIOUSBDeviceClassName) as NSMutableDictionary
         matchingDict[kUSBVendorID] = NSNumber(value: vendorID)
@@ -31,10 +33,10 @@ class USBHelper {
 
         var propertyIterator: io_iterator_t = 0
         let result = IORegistryEntryCreateIterator(
-            device,
-            kIOServicePlane,
-            IOOptionBits(kIORegistryIterateRecursively),
-            &propertyIterator
+                device,
+                kIOServicePlane,
+                IOOptionBits(kIORegistryIterateRecursively),
+                &propertyIterator
         )
 
         guard result == KERN_SUCCESS else {
@@ -59,25 +61,28 @@ class USBHelper {
 
         IOObjectRelease(propertyIterator)
 
+        deviceInfoCache[device] = (vendorID, productID)
         return (vendorID, productID)
     }
 
-        static func isControlSupported(device: io_service_t, control: UInt8) -> Bool {
+    static func isControlSupported(device: io_service_t, control: UInt8) -> Bool {
         var supported = false
         var propertyIterator: io_iterator_t = 0
 
         let result = IORegistryEntryCreateIterator(
-            device,
-            kIOServicePlane,
-            IOOptionBits(kIORegistryIterateRecursively),
-            &propertyIterator
+                device,
+                kIOServicePlane,
+                IOOptionBits(kIORegistryIterateRecursively),
+                &propertyIterator
         )
 
         guard result == KERN_SUCCESS else {
             return false
         }
 
-        defer { IOObjectRelease(propertyIterator) }
+        defer {
+            IOObjectRelease(propertyIterator)
+        }
 
         var current = IOIteratorNext(propertyIterator)
         while current != 0 {
@@ -92,11 +97,17 @@ class USBHelper {
                 if let controls = dict["SupportedControls"] as? [String: Any] {
                     let controlKey = String(format: "UVC_CTRL_%02X", control)
                     supported = controls[controlKey] != nil
-                    if supported { break }
+                    if supported {
+                        break
+                    }
                 }
             }
         }
 
         return supported
+    }
+
+    static func clearCache() {
+        deviceInfoCache.removeAll()
     }
 }

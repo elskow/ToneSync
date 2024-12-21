@@ -7,27 +7,10 @@ import AppKit
 
 class StatusBarManager {
     private var statusItem: NSStatusItem!
-    private var popover: NSPopover!
-
-    init() {
-        createStatusBarItem()
-        createPopover()
-    }
-
-    private func createStatusBarItem() {
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-
-        if let statusButton = statusItem.button {
-            statusButton.image = NSImage(systemSymbolName: "video.fill", accessibilityDescription: "Camera")
-            statusButton.action = #selector(togglePopover)
-            statusButton.target = self
-        }
-    }
-
-    private func createPopover() {
-        popover = NSPopover()
-        popover.contentSize = NSSize(width: 360, height: 380)
-        popover.behavior = .transient
+    private lazy var popover: NSPopover = {
+        let pop = NSPopover()
+        pop.contentSize = NSSize(width: 360, height: 380)
+        pop.behavior = .transient
 
         let contentView = ContentView()
             .background(Color.clear)
@@ -35,30 +18,66 @@ class StatusBarManager {
         let hostingController = NSHostingController(rootView: contentView)
         hostingController.view.appearance = NSAppearance(named: .vibrantDark)
 
-        popover.contentViewController = hostingController
+        pop.contentViewController = hostingController
+        pop.appearance = NSAppearance(named: .vibrantDark)
 
-        popover.appearance = NSAppearance(named: .vibrantDark)
-        if let effectView = popover.contentViewController?.view.superview?.subviews.first(where: { $0 is NSVisualEffectView }) as? NSVisualEffectView {
+        if let effectView = pop.contentViewController?.view.superview?.subviews.first(where: { $0 is NSVisualEffectView }) as? NSVisualEffectView {
             effectView.material = .hudWindow
             effectView.state = .active
             effectView.blendingMode = .behindWindow
         }
+
+        return pop
+    }()
+
+    init() {
+        setupStatusItem()
+    }
+
+    private func setupStatusItem() {
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+
+        if let button = statusItem.button {
+            if let image = NSImage(systemSymbolName: "video.fill", accessibilityDescription: "Camera") {
+                image.isTemplate = true
+                button.image = image
+            }
+            button.action = #selector(togglePopover)
+            button.target = self
+        }
     }
 
     @objc private func togglePopover() {
-        if let button = statusItem.button {
-            if popover.isShown {
-                popover.performClose(nil)
-            } else {
-                popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+        guard let button = statusItem.button else { return }
 
-                if let window = popover.contentViewController?.view.window {
-                    window.isOpaque = false
-                    window.backgroundColor = .clear
-
-                    window.makeKey()
-                }
-            }
+        if popover.isShown {
+            closePopover()
+        } else {
+            showPopover(button)
         }
+    }
+
+    private func showPopover(_ button: NSStatusBarButton) {
+        popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+        CameraManager.shared.setPreviewActive(true)
+
+        if let window = popover.contentViewController?.view.window {
+            window.isOpaque = false
+            window.backgroundColor = .clear
+            window.makeKey()
+        }
+
+        NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
+            self?.closePopover()
+        }
+    }
+
+    private func closePopover() {
+        popover.performClose(nil)
+        CameraManager.shared.setPreviewActive(false)
+    }
+
+    deinit {
+        NSEvent.removeMonitor(self)
     }
 }

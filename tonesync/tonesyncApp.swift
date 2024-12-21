@@ -23,4 +23,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusBarManager = StatusBarManager()
     }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        if let device = CameraManager.shared.currentDevice {
+            CameraManager.shared.resetCamera(device)
+        }
+        CameraManager.shared.setPreviewActive(false)
+        USBHelper.clearCache()
+    }
 }

@@ -14,12 +14,14 @@
 		EA5E566630B0F1ECC470DA6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA5E59F963AAEC879949AA85 /* Assets.xcassets */; };
 		EA5E580A8283DABB4F47AEF6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E55340422076308312E26 /* ContentView.swift */; };
 		EA5E580E57426D96222025E6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA5E58BC55C61F8B5FCBEB6D /* Preview Assets.xcassets */; };
+		EA5E5B01F56539F71EA1D0AD /* CaptureDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E52CB962EDAD8C0BA281E /* CaptureDevice.swift */; };
 		EA5E5E6F2B837CCE5B885B36 /* StatusBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E513FF76943F7E29E0F33 /* StatusBarManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EA5E50B2E0EAF972663D4ADF /* tonesync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tonesync.entitlements; sourceTree = "<group>"; };
 		EA5E513FF76943F7E29E0F33 /* StatusBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarManager.swift; sourceTree = "<group>"; };
+		EA5E52CB962EDAD8C0BA281E /* CaptureDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureDevice.swift; sourceTree = "<group>"; };
 		EA5E55340422076308312E26 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EA5E56AB7A78841C8532E661 /* tonesyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tonesyncApp.swift; sourceTree = "<group>"; };
 		EA5E5821F727BDCFE350A49D /* ColorScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				EA5E5821F727BDCFE350A49D /* ColorScheme.swift */,
 				EA5E513FF76943F7E29E0F33 /* StatusBarManager.swift */,
 				EA5E587703101FC9A7D94A05 /* USBHelper.swift */,
+				EA5E52CB962EDAD8C0BA281E /* CaptureDevice.swift */,
 			);
 			path = tonesync;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 				EA5E5031203D70328C012A28 /* ColorScheme.swift in Sources */,
 				EA5E5E6F2B837CCE5B885B36 /* StatusBarManager.swift in Sources */,
 				EA5E54711B1278556CA248F1 /* USBHelper.swift in Sources */,
+				EA5E5B01F56539F71EA1D0AD /* CaptureDevice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

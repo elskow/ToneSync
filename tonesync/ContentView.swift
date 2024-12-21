@@ -172,6 +172,7 @@ struct CameraPreview: NSViewRepresentable {
                 self.session = session
             }
         }
+        CameraManager.shared.setPreviewActive(true)
     }
 
     func makeNSView(context: Context) -> NSView {
@@ -194,5 +195,20 @@ struct CameraPreview: NSViewRepresentable {
 
     func updateNSView(_ nsView: NSView, context: Context) {
     }
-}
 
+    static func dismantleNSView(_ nsView: NSView, coordinator: ()) {
+        if let previewLayer = nsView.layer as? AVCaptureVideoPreviewLayer,
+           let session = previewLayer.session {
+            session.stopRunning()
+
+            for input in session.inputs {
+                session.removeInput(input)
+            }
+            for output in session.outputs {
+                session.removeOutput(output)
+            }
+        }
+
+        CameraManager.shared.setPreviewActive(false)
+    }
+}

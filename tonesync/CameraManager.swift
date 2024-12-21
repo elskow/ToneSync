@@ -11,28 +11,83 @@ import IOKit.usb
 class CameraManager: ObservableObject {
     static let shared = CameraManager()
 
-    @Published var currentDevice: CaptureDevice?
+    @Published var currentDevice: CaptureDevice? {
+        willSet {
+            objectWillChange.send()
+        }
+        didSet {
+            if let device = currentDevice {
+                updateOptimizationState()
+            }
+        }
+    }
     @Published var availableDevices: [CaptureDevice] = []
     @Published private(set) var isOptimized: Bool = false
 
+    private var optimizationTimer: Timer?
+    private var isPreviewActive: Bool = false
+    private var discoverySession: AVCaptureDevice.DiscoverySession?
+
     init() {
         loadDevices()
+        startMonitoringCameraUsage()
+    }
+
+    func setPreviewActive(_ active: Bool) {
+        isPreviewActive = active
+        if active || currentDevice?.avDevice.isInUseByAnotherApplication == true {
+            startMonitoringCameraUsage()
+        } else {
+            stopMonitoringCameraUsage()
+        }
+        updateOptimizationState()
+    }
+
+    private func updateOptimizationState() {
+        guard let device = currentDevice else { return }
+
+        if device.avDevice.isInUseByAnotherApplication || isPreviewActive {
+            if !isOptimized {
+                optimizeCamera(device)
+            }
+        } else {
+            if isOptimized {
+                resetCamera(device)
+            }
+        }
+    }
+
+    private func startMonitoringCameraUsage() {
+        stopMonitoringCameraUsage() // Stop existing timer if any
+        optimizationTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+            self?.checkCameraUsageAndOptimize()
+        }
+    }
+
+    private func stopMonitoringCameraUsage() {
+        optimizationTimer?.invalidate()
+        optimizationTimer = nil
+    }
+
+    private func checkCameraUsageAndOptimize() {
+        updateOptimizationState()
     }
 
     func loadDevices() {
-        let session = AVCaptureDevice.DiscoverySession(
+        if discoverySession == nil {
+            discoverySession = AVCaptureDevice.DiscoverySession(
                 deviceTypes: [.externalUnknown, .builtInWideAngleCamera],
                 mediaType: .video,
                 position: .unspecified
-        )
-
-        availableDevices = session.devices.map { device in
-            CaptureDevice(device: device)
+            )
         }
+
+        availableDevices = discoverySession?.devices.map { device in
+            CaptureDevice(device: device)
+        } ?? []
 
         if let first = availableDevices.first {
             currentDevice = first
-            optimizeCamera(first)
         }
     }
 
@@ -166,23 +221,9 @@ class CameraManager: ObservableObject {
             print("Could not reset camera: \(error)")
         }
     }
-}
 
-struct CaptureDevice: Identifiable, Hashable {
-    let id = UUID()
-    let name: String
-    let avDevice: AVCaptureDevice
 
-    init(device: AVCaptureDevice) {
-        self.name = device.localizedName
-        self.avDevice = device
-    }
-
-    static func ==(lhs: CaptureDevice, rhs: CaptureDevice) -> Bool {
-        return lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+    deinit {
+        optimizationTimer?.invalidate()
     }
 }
