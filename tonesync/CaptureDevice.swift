@@ -5,21 +5,12 @@
 import AVFoundation
 import Foundation
 
-struct CaptureDevice: Identifiable, Hashable {
-    let id = UUID()
+struct CaptureDevice {
     let name: String
     let avDevice: AVCaptureDevice
 
     init(device: AVCaptureDevice) {
         self.name = device.localizedName
         self.avDevice = device
-    }
-
-    static func ==(lhs: CaptureDevice, rhs: CaptureDevice) -> Bool {
-        return lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
     }
 }

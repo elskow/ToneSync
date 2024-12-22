@@ -8,24 +8,20 @@ import IOKit
 import IOKit.usb
 
 
-class CameraManager: ObservableObject {
+class CameraManager {
     static let shared = CameraManager()
 
-    @Published var currentDevice: CaptureDevice? {
-        willSet {
-            objectWillChange.send()
-        }
+    var currentDevice: CaptureDevice? {
         didSet {
             if let device = currentDevice {
                 updateOptimizationState()
             }
         }
     }
-    @Published var availableDevices: [CaptureDevice] = []
-    @Published private(set) var isOptimized: Bool = false
+    var availableDevices: [CaptureDevice] = []
+    private(set) var isOptimized: Bool = false
 
     private var optimizationTimer: Timer?
-    private var isPreviewActive: Bool = false
     private var discoverySession: AVCaptureDevice.DiscoverySession?
 
     init() {
@@ -33,20 +29,10 @@ class CameraManager: ObservableObject {
         startMonitoringCameraUsage()
     }
 
-    func setPreviewActive(_ active: Bool) {
-        isPreviewActive = active
-        if active || currentDevice?.avDevice.isInUseByAnotherApplication == true {
-            startMonitoringCameraUsage()
-        } else {
-            stopMonitoringCameraUsage()
-        }
-        updateOptimizationState()
-    }
-
     private func updateOptimizationState() {
         guard let device = currentDevice else { return }
 
-        if device.avDevice.isInUseByAnotherApplication || isPreviewActive {
+        if device.avDevice.isInUseByAnotherApplication {
             if !isOptimized {
                 optimizeCamera(device)
             }

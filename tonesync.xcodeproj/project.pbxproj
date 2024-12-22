@@ -7,27 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EA5E5031203D70328C012A28 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E5821F727BDCFE350A49D /* ColorScheme.swift */; };
 		EA5E5038D9B91374474FF0B9 /* tonesyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E56AB7A78841C8532E661 /* tonesyncApp.swift */; };
+		EA5E52C9E5C78D9B5B46A7AB /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E50FDD06157722D5381B8 /* PreferencesView.swift */; };
 		EA5E53E67BA9B3E0FD2FD298 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E5FC10D147EB20FC115E3 /* CameraManager.swift */; };
 		EA5E54711B1278556CA248F1 /* USBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E587703101FC9A7D94A05 /* USBHelper.swift */; };
 		EA5E566630B0F1ECC470DA6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA5E59F963AAEC879949AA85 /* Assets.xcassets */; };
-		EA5E580A8283DABB4F47AEF6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E55340422076308312E26 /* ContentView.swift */; };
 		EA5E580E57426D96222025E6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA5E58BC55C61F8B5FCBEB6D /* Preview Assets.xcassets */; };
 		EA5E5B01F56539F71EA1D0AD /* CaptureDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E52CB962EDAD8C0BA281E /* CaptureDevice.swift */; };
+		EA5E5CD21B59DDCA2E02CEDA /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E5CCDF9FBA144035E5040 /* LaunchAtLogin.swift */; };
 		EA5E5E6F2B837CCE5B885B36 /* StatusBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E513FF76943F7E29E0F33 /* StatusBarManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EA5E50B2E0EAF972663D4ADF /* tonesync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tonesync.entitlements; sourceTree = "<group>"; };
+		EA5E50FDD06157722D5381B8 /* PreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		EA5E513FF76943F7E29E0F33 /* StatusBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarManager.swift; sourceTree = "<group>"; };
 		EA5E52CB962EDAD8C0BA281E /* CaptureDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureDevice.swift; sourceTree = "<group>"; };
-		EA5E55340422076308312E26 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EA5E56AB7A78841C8532E661 /* tonesyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tonesyncApp.swift; sourceTree = "<group>"; };
-		EA5E5821F727BDCFE350A49D /* ColorScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		EA5E587703101FC9A7D94A05 /* USBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USBHelper.swift; sourceTree = "<group>"; };
 		EA5E58BC55C61F8B5FCBEB6D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EA5E59F963AAEC879949AA85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EA5E5CCDF9FBA144035E5040 /* LaunchAtLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
 		EA5E5D810178BD9C52B43EF0 /* tonesync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tonesync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA5E5FC10D147EB20FC115E3 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,12 +58,12 @@
 				EA5E50B2E0EAF972663D4ADF /* tonesync.entitlements */,
 				EA5E5DCF24971C2C97586B65 /* Preview Content */,
 				EA5E56AB7A78841C8532E661 /* tonesyncApp.swift */,
-				EA5E55340422076308312E26 /* ContentView.swift */,
 				EA5E5FC10D147EB20FC115E3 /* CameraManager.swift */,
-				EA5E5821F727BDCFE350A49D /* ColorScheme.swift */,
 				EA5E513FF76943F7E29E0F33 /* StatusBarManager.swift */,
 				EA5E587703101FC9A7D94A05 /* USBHelper.swift */,
 				EA5E52CB962EDAD8C0BA281E /* CaptureDevice.swift */,
+				EA5E50FDD06157722D5381B8 /* PreferencesView.swift */,
+				EA5E5CCDF9FBA144035E5040 /* LaunchAtLogin.swift */,
 			);
 			path = tonesync;
 			sourceTree = "<group>";
@@ -144,12 +144,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA5E5038D9B91374474FF0B9 /* tonesyncApp.swift in Sources */,
-				EA5E580A8283DABB4F47AEF6 /* ContentView.swift in Sources */,
 				EA5E53E67BA9B3E0FD2FD298 /* CameraManager.swift in Sources */,
-				EA5E5031203D70328C012A28 /* ColorScheme.swift in Sources */,
 				EA5E5E6F2B837CCE5B885B36 /* StatusBarManager.swift in Sources */,
 				EA5E54711B1278556CA248F1 /* USBHelper.swift in Sources */,
 				EA5E5B01F56539F71EA1D0AD /* CaptureDevice.swift in Sources */,
+				EA5E52C9E5C78D9B5B46A7AB /* PreferencesView.swift in Sources */,
+				EA5E5CD21B59DDCA2E02CEDA /* LaunchAtLogin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
