@@ -7,10 +7,12 @@ import AppKit
 import AVFoundation
 import UserNotifications
 
-class StatusBarManager {
+class StatusBarManager: NSObject {
     private var statusItem: NSStatusItem!
+    private var preferencesWindow: NSWindow?
 
-    init() {
+    override init() {
+        super.init()
         setupStatusItem()
     }
 
@@ -21,7 +23,6 @@ class StatusBarManager {
             button.image = NSImage(systemSymbolName: "video.fill", accessibilityDescription: "Camera")
             button.image?.isTemplate = true
 
-            // Add menu
             let menu = NSMenu()
 
             let optimizeItem = NSMenuItem(title: "Optimize Camera", action: #selector(optimizeCamera), keyEquivalent: "o")
@@ -49,16 +50,27 @@ class StatusBarManager {
     }
 
     @objc private func showPreferences() {
-        let preferencesWindow = NSWindow(
-                contentRect: NSRect(x: 0, y: 0, width: 300, height: 150),
-                styleMask: [.titled, .closable],
-                backing: .buffered,
-                defer: false
+        if let window = preferencesWindow {
+            window.makeKeyAndOrderFront(nil)
+            NSApp.activate(ignoringOtherApps: true)
+            return
+        }
+
+        let window = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 300, height: 150),
+            styleMask: [.titled, .closable],
+            backing: .buffered,
+            defer: false
         )
-        preferencesWindow.title = "Preferences"
-        preferencesWindow.contentView = NSHostingView(rootView: PreferencesView())
-        preferencesWindow.center()
-        preferencesWindow.makeKeyAndOrderFront(nil)
+
+        window.title = "Preferences"
+        window.contentView = NSHostingView(rootView: PreferencesView())
+        window.center()
+        window.isReleasedWhenClosed = false
+        window.hidesOnDeactivate = false
+        window.delegate = self
+        preferencesWindow = window
+        window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
     }
 
@@ -101,6 +113,15 @@ class StatusBarManager {
             if let error = error {
                 print("Error showing notification: \(error)")
             }
+        }
+    }
+}
+
+
+extension StatusBarManager: NSWindowDelegate {
+    func windowWillClose(_ notification: Notification) {
+        if let window = notification.object as? NSWindow {
+            window.orderOut(nil)
         }
     }
 }
