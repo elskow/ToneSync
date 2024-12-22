@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD3778152D1834FC008F4A43 /* tunesync-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DD3778142D1834FC008F4A43 /* tunesync-icon.png */; };
 		EA5E5038D9B91374474FF0B9 /* tonesyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E56AB7A78841C8532E661 /* tonesyncApp.swift */; };
 		EA5E52C9E5C78D9B5B46A7AB /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E50FDD06157722D5381B8 /* PreferencesView.swift */; };
 		EA5E53E67BA9B3E0FD2FD298 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E5FC10D147EB20FC115E3 /* CameraManager.swift */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD3778132D1834A2008F4A43 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		DD3778142D1834FC008F4A43 /* tunesync-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tunesync-icon.png"; sourceTree = "<group>"; };
 		EA5E50B2E0EAF972663D4ADF /* tonesync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tonesync.entitlements; sourceTree = "<group>"; };
 		EA5E50FDD06157722D5381B8 /* PreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		EA5E513FF76943F7E29E0F33 /* StatusBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarManager.swift; sourceTree = "<group>"; };
@@ -71,6 +74,8 @@
 		EA5E5D6C7816517258A9F9CE = {
 			isa = PBXGroup;
 			children = (
+				DD3778132D1834A2008F4A43 /* README.md */,
+				DD3778142D1834FC008F4A43 /* tunesync-icon.png */,
 				EA5E502714A4564838501A54 /* Products */,
 				EA5E54FFAA1AB576961ACC8E /* tonesync */,
 			);
@@ -109,11 +114,14 @@
 /* Begin PBXProject section */
 		EA5E5A9074E11900516CE3D2 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = EA5E51CB7B47BCF35784833A /* Build configuration list for PBXProject "tonesync" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = EA5E5D6C7816517258A9F9CE;
@@ -132,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA5E566630B0F1ECC470DA6D /* Assets.xcassets in Resources */,
+				DD3778152D1834FC008F4A43 /* tunesync-icon.png in Resources */,
 				EA5E580E57426D96222025E6 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,8 +317,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -332,6 +340,7 @@
 				EA5E504640BBDD68884C6CA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
