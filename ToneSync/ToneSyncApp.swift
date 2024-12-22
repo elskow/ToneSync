@@ -1,6 +1,6 @@
 //
-//  tonesyncApp.swift
-//  tonesync
+//  ToneSyncApp.swift
+//  ToneSync
 //
 //  Created by Helmy LuqmanulHakim on 21/12/24.
 //
@@ -10,7 +10,7 @@ import SwiftUI
 import UserNotifications
 
 @main
-struct tonesyncApp: App {
+struct ToneSyncApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {

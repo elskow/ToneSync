@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD3778152D1834FC008F4A43 /* tunesync-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DD3778142D1834FC008F4A43 /* tunesync-icon.png */; };
-		EA5E5038D9B91374474FF0B9 /* tonesyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E56AB7A78841C8532E661 /* tonesyncApp.swift */; };
+		EA5E5038D9B91374474FF0B9 /* ToneSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E56AB7A78841C8532E661 /* ToneSyncApp.swift */; };
 		EA5E52C9E5C78D9B5B46A7AB /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E50FDD06157722D5381B8 /* PreferencesView.swift */; };
 		EA5E53E67BA9B3E0FD2FD298 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E5FC10D147EB20FC115E3 /* CameraManager.swift */; };
 		EA5E54711B1278556CA248F1 /* USBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5E587703101FC9A7D94A05 /* USBHelper.swift */; };
@@ -21,17 +20,16 @@
 
 /* Begin PBXFileReference section */
 		DD3778132D1834A2008F4A43 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		DD3778142D1834FC008F4A43 /* tunesync-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tunesync-icon.png"; sourceTree = "<group>"; };
-		EA5E50B2E0EAF972663D4ADF /* tonesync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tonesync.entitlements; sourceTree = "<group>"; };
+		EA5E50B2E0EAF972663D4ADF /* ToneSync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToneSync.entitlements; sourceTree = "<group>"; };
 		EA5E50FDD06157722D5381B8 /* PreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		EA5E513FF76943F7E29E0F33 /* StatusBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarManager.swift; sourceTree = "<group>"; };
 		EA5E52CB962EDAD8C0BA281E /* CaptureDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureDevice.swift; sourceTree = "<group>"; };
-		EA5E56AB7A78841C8532E661 /* tonesyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tonesyncApp.swift; sourceTree = "<group>"; };
+		EA5E56AB7A78841C8532E661 /* ToneSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneSyncApp.swift; sourceTree = "<group>"; };
 		EA5E587703101FC9A7D94A05 /* USBHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = USBHelper.swift; sourceTree = "<group>"; };
 		EA5E58BC55C61F8B5FCBEB6D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EA5E59F963AAEC879949AA85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA5E5CCDF9FBA144035E5040 /* LaunchAtLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
-		EA5E5D810178BD9C52B43EF0 /* tonesync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tonesync.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA5E5D810178BD9C52B43EF0 /* ToneSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToneSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA5E5FC10D147EB20FC115E3 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -49,18 +47,18 @@
 		EA5E502714A4564838501A54 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EA5E5D810178BD9C52B43EF0 /* tonesync.app */,
+				EA5E5D810178BD9C52B43EF0 /* ToneSync.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EA5E54FFAA1AB576961ACC8E /* tonesync */ = {
+		EA5E54FFAA1AB576961ACC8E /* ToneSync */ = {
 			isa = PBXGroup;
 			children = (
 				EA5E59F963AAEC879949AA85 /* Assets.xcassets */,
-				EA5E50B2E0EAF972663D4ADF /* tonesync.entitlements */,
+				EA5E50B2E0EAF972663D4ADF /* ToneSync.entitlements */,
 				EA5E5DCF24971C2C97586B65 /* Preview Content */,
-				EA5E56AB7A78841C8532E661 /* tonesyncApp.swift */,
+				EA5E56AB7A78841C8532E661 /* ToneSyncApp.swift */,
 				EA5E5FC10D147EB20FC115E3 /* CameraManager.swift */,
 				EA5E513FF76943F7E29E0F33 /* StatusBarManager.swift */,
 				EA5E587703101FC9A7D94A05 /* USBHelper.swift */,
@@ -68,16 +66,15 @@
 				EA5E50FDD06157722D5381B8 /* PreferencesView.swift */,
 				EA5E5CCDF9FBA144035E5040 /* LaunchAtLogin.swift */,
 			);
-			path = tonesync;
+			path = ToneSync;
 			sourceTree = "<group>";
 		};
 		EA5E5D6C7816517258A9F9CE = {
 			isa = PBXGroup;
 			children = (
 				DD3778132D1834A2008F4A43 /* README.md */,
-				DD3778142D1834FC008F4A43 /* tunesync-icon.png */,
 				EA5E502714A4564838501A54 /* Products */,
-				EA5E54FFAA1AB576961ACC8E /* tonesync */,
+				EA5E54FFAA1AB576961ACC8E /* ToneSync */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,9 +89,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EA5E5830B9DD4D9C0CE2834D /* tonesync */ = {
+		EA5E5830B9DD4D9C0CE2834D /* ToneSync */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EA5E52ADC3F10751A97C26D3 /* Build configuration list for PBXNativeTarget "tonesync" */;
+			buildConfigurationList = EA5E52ADC3F10751A97C26D3 /* Build configuration list for PBXNativeTarget "ToneSync" */;
 			buildPhases = (
 				EA5E5595AEEBFC70F1BBCBD7 /* Sources */,
 				EA5E590533FBAE2FCC3BB0BB /* Frameworks */,
@@ -104,9 +101,9 @@
 			);
 			dependencies = (
 			);
-			name = tonesync;
+			name = ToneSync;
 			productName = tonesync;
-			productReference = EA5E5D810178BD9C52B43EF0 /* tonesync.app */;
+			productReference = EA5E5D810178BD9C52B43EF0 /* ToneSync.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -115,21 +112,22 @@
 		EA5E5A9074E11900516CE3D2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 1420;
 			};
-			buildConfigurationList = EA5E51CB7B47BCF35784833A /* Build configuration list for PBXProject "tonesync" */;
+			buildConfigurationList = EA5E51CB7B47BCF35784833A /* Build configuration list for PBXProject "ToneSync" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = EA5E5D6C7816517258A9F9CE;
 			productRefGroup = EA5E502714A4564838501A54 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EA5E5830B9DD4D9C0CE2834D /* tonesync */,
+				EA5E5830B9DD4D9C0CE2834D /* ToneSync */,
 			);
 		};
 /* End PBXProject section */
@@ -140,7 +138,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA5E566630B0F1ECC470DA6D /* Assets.xcassets in Resources */,
-				DD3778152D1834FC008F4A43 /* tunesync-icon.png in Resources */,
 				EA5E580E57426D96222025E6 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -152,7 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA5E5038D9B91374474FF0B9 /* tonesyncApp.swift in Sources */,
+				EA5E5038D9B91374474FF0B9 /* ToneSyncApp.swift in Sources */,
 				EA5E53E67BA9B3E0FD2FD298 /* CameraManager.swift in Sources */,
 				EA5E5E6F2B837CCE5B885B36 /* StatusBarManager.swift in Sources */,
 				EA5E54711B1278556CA248F1 /* USBHelper.swift in Sources */,
@@ -171,16 +168,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = tonesync/tonesync.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"tonesync/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ToneSync;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.helmyl.tonesync;
+				PRODUCT_BUNDLE_IDENTIFIER = com.helmyl.ToneSync;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -193,16 +193,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = tonesync/tonesync.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"tonesync/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ToneSync;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.helmyl.tonesync;
+				PRODUCT_BUNDLE_IDENTIFIER = com.helmyl.ToneSync;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -213,6 +216,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -242,6 +246,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -273,6 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -302,6 +308,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -324,7 +331,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EA5E51CB7B47BCF35784833A /* Build configuration list for PBXProject "tonesync" */ = {
+		EA5E51CB7B47BCF35784833A /* Build configuration list for PBXProject "ToneSync" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EA5E5BD83AC7D5BE7253BBC1 /* Debug */,
@@ -333,7 +340,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EA5E52ADC3F10751A97C26D3 /* Build configuration list for PBXNativeTarget "tonesync" */ = {
+		EA5E52ADC3F10751A97C26D3 /* Build configuration list for PBXNativeTarget "ToneSync" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EA5E521FA3E9C9F04C88864C /* Debug */,
