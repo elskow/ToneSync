@@ -20,8 +20,11 @@ class StatusBarManager: NSObject {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
         if let button = statusItem.button {
-            button.image = NSImage(systemSymbolName: "video.fill", accessibilityDescription: "Camera")
-            button.image?.isTemplate = true
+            if let iconImage = NSImage(named: "AppIcon") {
+                iconImage.size = NSSize(width: 18, height: 18)
+                iconImage.isTemplate = true
+                button.image = iconImage
+            }
 
             let menu = NSMenu()
 
