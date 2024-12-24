@@ -16,58 +16,119 @@
 default_platform(:mac)
 
 platform :mac do
+  def cleanup_build_artifacts
+    UI.message("Cleaning up build artifacts...")
+
+    # Remove temporary build directories
+    sh("rm -rf '../build/dmg-contents'") if Dir.exist?("../build/dmg-contents")
+    sh("rm -rf '../build/Intermediates'") if Dir.exist?("../build/Intermediates")
+
+    # Clean derived data
+    sh("rm -rf ~/Library/Developer/Xcode/DerivedData/ToneSync-*")
+
+    # Clean Xcode cache
+    sh("xcrun --kill-cache")
+
+    UI.success("Cleanup completed")
+  rescue => e
+    UI.error("Cleanup failed: #{e.message}")
+  end
+
+  # Execute cleanup after all lanes
+  after_all do |lane|
+    cleanup_build_artifacts
+    notification(subtitle: "Success", message: "#{lane} completed successfully!")
+  end
+
+  # Execute cleanup on error
+  error do |lane, exception|
+    cleanup_build_artifacts
+    UI.error("#{lane} failed with error: #{exception}")
+    notification(subtitle: "Failed", message: "#{lane} failed with error!")
+  end
+
   desc "Build and package ToneSync"
   lane :build do
-    sh("mkdir -p ../build")
+    begin
+      sh("mkdir -p ../build")
 
-    build_mac_app(
-      scheme: "ToneSync",
-      output_directory: "../build",
-      clean: true,
-      configuration: "Debug",
-      skip_package_pkg: true,
-      skip_codesigning: true,
-      export_method: "developer-id",
-      xcargs: "CODE_SIGN_IDENTITY=- CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO"
-    )
+      build_mac_app(
+        scheme: "ToneSync",
+        output_directory: "../build",
+        clean: true,
+        configuration: "Debug",
+        skip_package_pkg: true,
+        skip_codesigning: true,
+        export_method: "developer-id",
+        xcargs: "CODE_SIGN_IDENTITY=- CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO"
+      )
 
-    if File.exist?("../build/ToneSync.app")
-      sh("rm -f ../build/ToneSync.dmg")
+      if File.exist?("../build/ToneSync.app")
+        sh("rm -f ../build/ToneSync.dmg")
 
-      sh("hdiutil create -volname 'ToneSync' -srcfolder '../build/ToneSync.app' -format UDZO -fs HFS+ -ov '../build/ToneSync.dmg'")
-    else
-      UI.error("App not found in build directory!")
-      next
+        # Create temporary directory for DMG contents
+        sh("mkdir -p '../build/dmg-contents'")
+
+        # Copy the app to the temporary directory
+        sh("cp -r '../build/ToneSync.app' '../build/dmg-contents/'")
+
+        # Create Applications folder symlink
+        sh("ln -s /Applications '../build/dmg-contents/Applications'")
+
+        # Create DMG
+        sh("hdiutil create -volname 'ToneSync' -srcfolder '../build/dmg-contents' -format UDZO -fs HFS+ -ov '../build/ToneSync.dmg'")
+      else
+        UI.error("App not found in build directory!")
+        next
+      end
+    rescue => e
+      UI.error("Build failed: #{e.message}")
+      raise
     end
   end
 
   desc "Build and notarize for distribution"
   lane :release do
-    sh("mkdir -p ../build")
+    begin
+      sh("mkdir -p ../build")
 
-    build_mac_app(
-      scheme: "ToneSync",
-      output_directory: "../build",
-      clean: true,
-      configuration: "Release",
-      export_method: "developer-id",
-      xcargs: "DEVELOPMENT_TEAM='#{ENV["TEAM_ID"]}' CODE_SIGN_IDENTITY='Developer ID Application'"
-    )
-
-    if File.exist?("../build/ToneSync.app")
-      sh("rm -f ../build/ToneSync.dmg")
-
-      sh("hdiutil create -volname 'ToneSync' -srcfolder '../build/ToneSync.app' -format UDZO -fs HFS+ -ov '../build/ToneSync.dmg'")
-
-      notarize(
-        package: "../build/ToneSync.dmg",
-        bundle_id: "com.helmyl.ToneSync",
-        username: ENV["APPLE_ID"],
-        team_id: ENV["TEAM_ID"]
+      build_mac_app(
+        scheme: "ToneSync",
+        output_directory: "../build",
+        clean: true,
+        configuration: "Release",
+        export_method: "developer-id",
+        xcargs: "DEVELOPMENT_TEAM='#{ENV["TEAM_ID"]}' CODE_SIGN_IDENTITY='Developer ID Application'"
       )
-    else
-      UI.error("App not found in build directory!")
-      next
+
+      if File.exist?("../build/ToneSync.app")
+        sh("rm -f ../build/ToneSync.dmg")
+
+        # Create temporary directory for DMG contents
+        sh("mkdir -p '../build/dmg-contents'")
+
+        # Copy the app to the temporary directory
+        sh("cp -r '../build/ToneSync.app' '../build/dmg-contents/'")
+
+        # Create Applications folder symlink
+        sh("ln -s /Applications '../build/dmg-contents/Applications'")
+
+        # Create DMG
+        sh("hdiutil create -volname 'ToneSync' -srcfolder '../build/dmg-contents' -format UDZO -fs HFS+ -ov '../build/ToneSync.dmg'")
+
+        notarize(
+          package: "../build/ToneSync.dmg",
+          bundle_id: "com.helmyl.ToneSync",
+          username: ENV["APPLE_ID"],
+          team_id: ENV["TEAM_ID"]
+        )
+      else
+        UI.error("App not found in build directory!")
+        next
+      end
+    rescue => e
+      UI.error("Release failed: #{e.message}")
+      raise
     end
   end
 end
